@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\News;
 
 class NewsSeeder extends Seeder
 {
@@ -13,6 +14,12 @@ class NewsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // News::create([
+        //     'title' => '',
+        //     'slug' => '',
+        //     'excerpt' => '',
+        //     'body' => '',
+        //     'published_at' => '',
+        // ]);
     }
 }
