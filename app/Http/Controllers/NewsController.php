@@ -15,7 +15,10 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        return view('home', [
+            "pageTitle" => "Berita Jombang",
+            "news" => News::latest()->get(),
+        ]);
     }
 
     /**

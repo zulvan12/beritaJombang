@@ -16,6 +16,7 @@ class AuthorFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'username' => $this->faker->unique()->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('qwerty@1234'),
             'remember_token' => Str::random(10),

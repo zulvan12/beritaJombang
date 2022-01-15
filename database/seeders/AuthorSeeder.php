@@ -17,6 +17,7 @@ class AuthorSeeder extends Seeder
     {
         author::create([
             'name' => 'sumanto',
+            'username' => 'sumanto1234',
             'email' => 'sumanto123@gmail.com',
             'password' => bcrypt('qwerty@1234'),
             'is_admin' => true,
