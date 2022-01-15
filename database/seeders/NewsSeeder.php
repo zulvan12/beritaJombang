@@ -14,12 +14,6 @@ class NewsSeeder extends Seeder
      */
     public function run()
     {
-        // News::create([
-        //     'title' => '',
-        //     'slug' => '',
-        //     'excerpt' => '',
-        //     'body' => '',
-        //     'published_at' => '',
-        // ]);
+        News::factory(20)->create();
     }
 }
