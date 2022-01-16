@@ -15,7 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('home', [
+            "pageTitle" => "Berita Jombang",
+            "news" => Category::all(),
+        ]);
     }
 
     /**
@@ -47,7 +50,10 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('home', [
+            "pageTitle" => "Berita Jombang : $category->name",
+            "news" => $category->news,
+        ]);
     }
 
     /**

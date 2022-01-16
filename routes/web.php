@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
+use App\Models\author;
+use App\Models\News;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +25,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [NewsController::class, 'index']);
+Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
+Route::get('/authors/{author:username}', [AuthorController::class, 'show']);
+Route::get('/{news:slug}', [NewsController::class, 'show']);

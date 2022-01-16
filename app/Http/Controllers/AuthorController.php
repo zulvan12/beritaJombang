@@ -47,7 +47,10 @@ class AuthorController extends Controller
      */
     public function show(author $author)
     {
-        //
+        return view('home', [
+            'pageTitle' => "Penulis : $author->name",
+            "news" => $author->news,
+        ]);
     }
 
     /**

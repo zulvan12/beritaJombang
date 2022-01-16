@@ -6,8 +6,11 @@
 @foreach ($news as $singleNews)
     <article class="mb-2 border-bottom pb-4">
         <h2><a href="#" class="text-decoration-none">{{ $singleNews->title }}</a></h2>
-        <p>Category : {{ $singleNews->category->name }} | Author : {{ $singleNews->author->name }}</p>
+
+        <p>Category : <a class="text-decoration-none" href="/categories/{{ $singleNews->category->slug }}">{{ $singleNews->category->name }}</a> | Author : <a class="text-decoration-none" href="/authors/{{ $singleNews->author->username }}">{{ $singleNews->author->name }}</a></p>
+
         <p>{{ $singleNews->excerpt }}</p>
+
         <a href="#" class="text-decoration-none">Read More...</a>
     </article>
 @endforeach
