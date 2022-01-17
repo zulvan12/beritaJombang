@@ -52,7 +52,7 @@ class CategoryController extends Controller
     {
         return view('home', [
             "pageTitle" => "Berita Jombang : $category->name",
-            "news" => $category->news,
+            "news" => $category->news->load(['category','author']),
         ]);
     }
 

@@ -17,7 +17,7 @@ class NewsController extends Controller
     {
         return view('home', [
             "pageTitle" => "Berita Jombang",
-            "news" => News::latest()->get(),
+            "news" => News::with(['author', 'category'])->latest()->get(),
         ]);
     }
 
@@ -52,7 +52,7 @@ class NewsController extends Controller
     {
         return view('news', [
             "pageTitle" => $news->title,
-            "news" => News::get(),
+            "news" => $news,
         ]);
     }
 

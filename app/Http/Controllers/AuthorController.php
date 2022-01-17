@@ -49,7 +49,7 @@ class AuthorController extends Controller
     {
         return view('home', [
             'pageTitle' => "Penulis : $author->name",
-            "news" => $author->news,
+            "news" => $author->news->load(['category', 'author']),
         ]);
     }
 
