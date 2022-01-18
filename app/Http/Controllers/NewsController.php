@@ -17,7 +17,7 @@ class NewsController extends Controller
     {
         return view('home', [
             "pageTitle" => "Berita Jombang",
-            "news" => News::with(['author', 'category'])->latest()->get(),
+            "news" => News::latest()->get(),
         ]);
     }
 

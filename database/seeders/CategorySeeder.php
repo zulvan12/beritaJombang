@@ -16,16 +16,19 @@ class CategorySeeder extends Seeder
     {
         Category::create([
             'name' => 'Kriminal',
+            'en_name' => 'criminal',
             'slug' => 'kriminal',
         ]);
 
         Category::create([
             'name' => 'Bencana',
+            'en_name' => 'natural disaster',
             'slug' => 'bencana',
         ]);
 
         Category::create([
             'name' => 'Politik',
+            'en_name' => 'politic',
             'slug' => 'politik',
         ]);
     }

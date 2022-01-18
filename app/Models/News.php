@@ -10,6 +10,7 @@ class News extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $with = ['author', 'category'];
 
     // relation between news and category, 1 news -> 1 category
     public function category()
