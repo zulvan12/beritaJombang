@@ -15,9 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('home', [
-            "pageTitle" => "Berita Jombang",
-            "news" => Category::all(),
+        return view('category', [
+            "pageTitle" => "Categories",
+            "listCategories" => Category::all(),
         ]);
     }
 

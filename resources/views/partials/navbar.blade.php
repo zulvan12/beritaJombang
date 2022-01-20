@@ -6,9 +6,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+
           <li class="nav-item">
             <a class="nav-link {{ ($pageTitle === 'Berita Jombang' ? 'active' : '') }}" aria-current="page" href="/">Home</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{ ($pageTitle === 'Categories' ? 'active' : '') }}" aria-current="page" href="/categories">Categories</a>
+          </li>
+
         </ul>
       </div>
     </div>

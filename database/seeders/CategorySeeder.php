@@ -21,7 +21,7 @@ class CategorySeeder extends Seeder
         ]);
 
         Category::create([
-            'name' => 'Bencana',
+            'name' => 'Bencana Alam',
             'en_name' => 'natural disaster',
             'slug' => 'bencana',
         ]);
@@ -30,6 +30,24 @@ class CategorySeeder extends Seeder
             'name' => 'Politik',
             'en_name' => 'politic',
             'slug' => 'politik',
+        ]);
+
+        Category::create([
+            'name' => 'Kebakaran',
+            'en_name' => 'wildfire',
+            'slug' => 'kebakaran',
+        ]);
+
+        Category::create([
+            'name' => 'Gempa',
+            'en_name' => 'earthquake',
+            'slug' => 'gempa',
+        ]);
+
+        Category::create([
+            'name' => 'Pemanasan Global',
+            'en_name' => 'global warming',
+            'slug' => 'pemanasan-global',
         ]);
     }
 }
