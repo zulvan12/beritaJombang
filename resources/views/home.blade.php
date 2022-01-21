@@ -3,12 +3,12 @@
 @section("content")
 <h1 class="mb-3">{{ $pageTitle }}</h1>
 
-<div class="row">
-    <div class="col-md-4 justify-content-end">
+<div class="row justify-content-end mb-3">
+    <div class="col-md-4">
         <form action="/">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search...">
-                <button class="btn btn-primary" type="button" id="button-addon2">Search</button>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search..." name="search" value="{{ request('search') }}">
+                <button class="btn btn-primary" type="submit">Search</button>
             </div>
         </form>
     </div>
