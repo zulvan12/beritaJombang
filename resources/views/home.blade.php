@@ -3,6 +3,17 @@
 @section("content")
 <h1 class="mb-3">{{ $pageTitle }}</h1>
 
+<div class="row">
+    <div class="col-md-4 justify-content-end">
+        <form action="/">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search...">
+                <button class="btn btn-primary" type="button" id="button-addon2">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 @if ($news->count())
 
 <div class="card mb-3">
@@ -18,10 +29,6 @@
       <a href="/{{ $news[0]->slug }}" class="text-decoration-none btn btn-primary">Read More...</a>
     </div>
 </div>
-
-@else
-    <p class="text-center fs-4">No Post Found</p>
-@endif
 
 <div class="row">
     @foreach ($news->skip(1) as $singleNews)
@@ -45,5 +52,9 @@
         </div>
     @endforeach
 </div>
+
+@else
+    <p class="text-center fs-4">No Post Found</p>
+@endif
 
 @endsection
