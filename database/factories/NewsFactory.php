@@ -14,7 +14,7 @@ class NewsFactory extends Factory
     public function definition()
     {
         return [
-            'category_id' => mt_rand(1,3),
+            'category_id' => mt_rand(1,6),
             'author_id' => mt_rand(1,6),
             'title' => $this->faker->sentence(mt_rand(2,8)),
             'slug' => $this->faker->slug(),

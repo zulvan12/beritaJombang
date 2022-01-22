@@ -23,7 +23,7 @@ class CategorySeeder extends Seeder
         Category::create([
             'name' => 'Bencana Alam',
             'en_name' => 'natural disaster',
-            'slug' => 'bencana',
+            'slug' => 'bencana-alam',
         ]);
 
         Category::create([
