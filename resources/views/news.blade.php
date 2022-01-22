@@ -8,7 +8,7 @@
 
         <img src="https://source.unsplash.com/1000x300?{{ $news->category->en_name }}" alt="{{ $news->category->name }}" class="img-fluid">
 
-        <p class="text-center text-muted mb-4">Kategori : <a class="text-decoration-none" href="categories/{{ $news->category->slug }}">{{ $news->category->name }}</a> | Penulis :  <a class="text-decoration-none" href="authors/{{ $news->author->username }}">{{ $news->author->name }}</a> | {{ $news->created_at->diffForHumans() }}</p>
+        <p class="text-center text-muted mb-4">Kategori : <a class="text-decoration-none" href="/?category={{ $news->category->slug }}">{{ $news->category->name }}</a> | Penulis :  <a class="text-decoration-none" href="authors/{{ $news->author->username }}">{{ $news->author->name }}</a> | {{ $news->created_at->diffForHumans() }}</p>
 
         <p >{!! $news->body !!}</p>
 
