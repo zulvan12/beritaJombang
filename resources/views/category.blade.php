@@ -6,7 +6,7 @@
 <div class="row mb-3">
     @foreach ($listCategories as $category)
         <div class="col-md-4 mb-4">
-            <a href="/categories/{{ $category->slug }}" class="text-decoration-none">
+            <a href="/?category={{ $category->slug }}" class="text-decoration-none">
             <div class="card">
                 <div class="card-img-overlay d-flex align-items-center p-0 text-white"><h5 class="card-title text-center flex-fill py-2" style="background-color : rgba(0,0,0,0.5)">{{ $category->name }}</h5>
                 </div>

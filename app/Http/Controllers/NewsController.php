@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\Models\Category;
+use App\Models\Author;
 use App\Http\Requests\StoreNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 
@@ -15,9 +17,24 @@ class NewsController extends Controller
      */
     public function index()
     {
+        $titleDescription = '';
+        if (request('category') && request('author')) {
+            $author = Author::firstWhere('username', request('author'));
+            $category = Category::firstWhere('slug', request('category'));
+            $titleDescription = ' di Kategori ' . $category->name . ' ditulis oleh ' . $author->name;
+        }
+        else if (request('category')) {
+            $category = Category::firstWhere('slug', request('category'));
+            $titleDescription = ' di Kategori ' . $category->name;
+
+        } elseif (request('author')) {
+            $author = Author::firstWhere('username', request('author'));
+            $titleDescription = ' ditulis oleh ' . $author->name;
+        }
+
         return view('home', [
-            "pageTitle" => "Berita Jombang",
-            "news" => News::latest()->filter(request(['search','category']))->get(),
+            "pageTitle" => "Berita Jombang" . $titleDescription,
+            "news" => News::latest()->filter(request(['search','category','author']))->get(),
         ]);
     }
 
