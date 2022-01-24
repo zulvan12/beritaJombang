@@ -34,7 +34,7 @@ class NewsController extends Controller
 
         return view('home', [
             "pageTitle" => "Berita Jombang" . $titleDescription,
-            "news" => News::latest()->filter(request(['search','category','author']))->get(),
+            "news" => News::latest()->filter(request(['search','category','author']))->paginate(7)->withQueryString(),
         ]);
     }
 

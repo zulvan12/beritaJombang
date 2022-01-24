@@ -58,6 +58,10 @@
     @endforeach
 </div>
 
+<div class="justify-content-center d-flex my-4">
+    {{ $news->links() }}
+</div>
+
 @else
     <p class="text-center fs-4">No Post Found</p>
 @endif
