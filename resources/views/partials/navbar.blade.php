@@ -13,8 +13,13 @@
           <li class="nav-item">
             <a class="nav-link {{ ($pageTitle === 'Categories' ? 'active' : '') }}" aria-current="page" href="/categories">Categories</a>
           </li>
-
         </ul>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a href="/login" class="nav-link {{ $pageTitle === 'Login' ? 'active' : '' }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+            </li>
+        </ul>
+
       </div>
     </div>
   </nav>
