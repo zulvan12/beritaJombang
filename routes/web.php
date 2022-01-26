@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\LoginController;
@@ -28,6 +28,7 @@ Route::get('/', [NewsController::class, 'index']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index']);
+Route::get('/register', [RegisterController::class, 'index']);
 Route::get('/{news:slug}', [NewsController::class, 'show']);
 
 // Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
