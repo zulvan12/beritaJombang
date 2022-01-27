@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\author;
 
 class RegisterController extends Controller
 {
@@ -36,7 +37,20 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData =  $request->validate([
+            'name' => 'required|max:255',
+            'username' => 'required|unique:authors,username|min:6|max:16',
+            'email' => 'required|email:dns|unique:authors,email',
+            'password' => 'required',
+        ]);
+
+        $validatedData['password'] = bcrypt($validatedData['password']);
+
+        author::create($validatedData);
+
+        $request->session()->flash('success', 'Registration Successfull! Please Login.');
+
+        return redirect('/login');
     }
 
     /**
