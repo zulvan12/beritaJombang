@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\author;
 
-class RegisterController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('register.index', [
-            'pageTitle' => 'Register',
-        ]);
+        return view('dashboard.index');
     }
 
     /**
@@ -37,20 +34,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData =  $request->validate([
-            'name' => 'required|max:255',
-            'username' => 'required|unique:authors,username|min:6|max:16',
-            'email' => 'required|email:dns|unique:authors,email',
-            'password' => 'required',
-        ]);
-
-        $validatedData['password'] = bcrypt($validatedData['password']);
-
-        author::create($validatedData);
-
-        $request->session()->flash('success', 'Registrasi berhasil, silahkan login!');
-
-        return redirect('/login');
+        //
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -27,10 +28,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [NewsController::class, 'index']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
 Route::get('/{news:slug}', [NewsController::class, 'show']);
 
 // Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
