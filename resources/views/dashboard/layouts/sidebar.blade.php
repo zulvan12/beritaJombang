@@ -13,6 +13,12 @@
             News
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link {{ Request::is('dashboard/news/create') ? 'active' : '' }}" href="/dashboard/news/create">
+            <span data-feather="file-plus"></span>
+            Write News
+          </a>
+        </li>
       </ul>
     </div>
   </nav>

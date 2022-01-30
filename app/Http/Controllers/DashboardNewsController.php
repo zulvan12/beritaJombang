@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardNewsController extends Controller
 {
@@ -26,7 +28,9 @@ class DashboardNewsController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.news.create',[
+            'categories' => Category::all(),
+        ]);
     }
 
     /**
@@ -37,7 +41,7 @@ class DashboardNewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
@@ -85,5 +89,11 @@ class DashboardNewsController extends Controller
     public function destroy(News $news)
     {
         //
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(News::class, 'slug', $request->title);
+        return response()->json(['slug' => $slug]);
     }
 }

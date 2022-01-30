@@ -7,6 +7,9 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">My Post</h1>
     </div>
+    <div>
+        <a href="/dashboard/news/create"><div class="btn btn-primary mb-2">Buat Berita</div></a>
+    </div>
     <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
