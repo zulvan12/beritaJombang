@@ -6,6 +6,7 @@ use App\Models\News;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Str;
 
 class DashboardNewsController extends Controller
 {
@@ -41,7 +42,18 @@ class DashboardNewsController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'slug' => 'required|unique:news,slug',
+            'category_id' => 'required',
+            'body' => 'required',
+        ]);
+
+        $validatedData['author_id'] = auth()->user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($validatedData['body']), 200, '...');
+
+        News::create($validatedData);
+        return redirect('/dashboard/news')->with('successInputNews','News has been added!');
     }
 
     /**
