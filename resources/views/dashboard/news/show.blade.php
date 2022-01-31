@@ -6,13 +6,17 @@
     <div class="container" id="top">
         <div class="row my-4">
             <div class="col-lg-10">
-                <h1 class="my-2">{{ $news->title }}</h1>
-
-                <img src="https://source.unsplash.com/1000x300?{{ $news->category->en_name }}" alt="{{ $news->category->name }}" class="img-fluid mb-3">
+                <h1 class="mt-2 mb-0">{{ $news->title }}</h1>
+                <p class="mb-2">Kategori : {{ $news->category->name }}</p>
+                <img src="https://source.unsplash.com/1000x300?{{ $news->category->en_name }}" alt="{{ $news->category->name }}" class="img-fluid mb-2">
 
                 <a href="/dashboard/news" class="btn btn-outline-primary"><span data-feather="arrow-left"></span> Back to My News</a>
-                <a href="#" class="btn btn-outline-success"><span data-feather="edit"></span> Edit</a>
-                <a href="#" class="btn btn-outline-danger"><span data-feather="x-circle"></span> Delete</a>
+                <a href="/dashboard/news/{{ $news->slug }}/edit" class="btn btn-outline-success"><span data-feather="edit"></span> Edit</a>
+                <form action="/dashboard/news/{{ $news->slug }}" method="post" class="d-inline">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-outline-danger" onclick='return confirm(`Delete "{{ $news->title }}" ?`)'><span data-feather="x-circle"></span> Delete</button>
+                </form>
 
                 <p >{!! $news->body !!}</p>
 

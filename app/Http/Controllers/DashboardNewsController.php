@@ -77,7 +77,10 @@ class DashboardNewsController extends Controller
      */
     public function edit(News $news)
     {
-        //
+        return view('dashboard.news.edit', [
+            'news' => $news,
+            'categories' => Category::all(),
+        ]);
     }
 
     /**
@@ -89,7 +92,23 @@ class DashboardNewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        //
+        $rules =[
+            'title' => 'required|max:255',
+            'category_id' => 'required',
+            'body' => 'required',
+        ];
+
+        if ($request->slug != $news->slug) {
+            $rules['slug'] = 'required|unique:news,slug';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        $validatedData['author_id'] = auth()->user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($validatedData['body']), 200, '...');
+
+        News::where('id', $news->id)->update($validatedData);
+        return redirect('/dashboard/news')->with('successInputNews','News has been updated!');
     }
 
     /**
@@ -100,7 +119,8 @@ class DashboardNewsController extends Controller
      */
     public function destroy(News $news)
     {
-        //
+        News::destroy($news->id);
+        return redirect('/dashboard/news')->with('deleteNews','News has been deleted!');
     }
 
     public function checkSlug(Request $request)
