@@ -22,14 +22,21 @@
 @if ($news->count())
 
 <div class="card mb-3">
-    <img src="https://source.unsplash.com/1200x200?{{ $news[0]->category->en_name }}" class="card-img-top" alt="{{ $news[0]->category->name }}">
+    @if ($news[0]->image)
+        <div style="max-height: 200px; overflow:hidden;">
+            <img src="{{ asset('storage/'.$news[0]->image) }}" alt="{{ $news[0]->category->name }}" class="card-img-top">
+        </div>
+    @else
+        <img src="https://source.unsplash.com/1200x200?{{ $news[0]->category->en_name }}" alt="{{ $news[0]->category->name }}" class="card-img-top">
+    @endif
+
     <div class="card-body text-center">
       <h3 class="card-title"><a href="/{{ $news[0]->slug }}" class="text-decoration-none">{{ $news[0]->title }}</a></h3>
 
       <p class="text-muted">Category : <a class="text-decoration-none" href="/?category={{ $news[0]->category->slug }}">{{ $news[0]->category->name }}</a> | Author : <a class="text-decoration-none" href="/?author={{ $news[0]->author->username }}">{{ $news[0]->author->name }}</a></p>
-      <p class="card-text">{{ $news[0]->excerpt }}</p>
+      <p class="card-text mb-0">{{ $news[0]->excerpt }}</p>
 
-      <p class="card-text"><small class="text-muted">{{ $news[0]->created_at->diffForHumans() }}</small></p>
+      <p class="card-text mb-0"><small class="text-muted">{{ $news[0]->created_at->diffForHumans() }}</small></p>
 
       <a href="/{{ $news[0]->slug }}" class="text-decoration-none btn btn-primary">Read More...</a>
     </div>
@@ -43,7 +50,13 @@
                     <a class="text-decoration-none text-white" href="/?category={{ $singleNews->category->slug }}">{{ $singleNews->category->name }}</a>
                 </div>
 
-                <img src="https://source.unsplash.com/300x200?{{ $singleNews->category->en_name }}" class="card-img-top" alt="{{ $singleNews->category->en_name }}">
+                @if ($singleNews->image)
+                    <div style="max-height: 300px; overflow:hidden;">
+                        <img src="{{ asset('storage/'.$singleNews->image) }}" alt="{{ $singleNews->category->name }}" class="card-img-top">
+                    </div>
+                @else
+                    <img src="https://source.unsplash.com/300x200?{{ $singleNews->category->en_name }}" class="card-img-top" alt="{{ $singleNews->category->en_name }}">
+                @endif
 
                 <div class="card-body">
                 <h5 class="card-title"><a href="/{{ $singleNews->slug }}" class="text-decoration-none">{{ $singleNews->title }}</a></h5>

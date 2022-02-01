@@ -45,9 +45,14 @@ class DashboardNewsController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:news,slug',
+            'newsImage' => 'image|file|max:2048',
             'category_id' => 'required',
             'body' => 'required',
         ]);
+
+        if ($request->file('newsImage')) {
+            $validatedData['image'] = $request->file('newsImage')->store('folder_newsImages');
+        }
 
         $validatedData['author_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($validatedData['body']), 200, '...');

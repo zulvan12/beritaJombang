@@ -6,7 +6,13 @@
     <div class="col-md-10">
         <h1 class="mb-2">{{ $pageTitle }}</h1>
 
-        <img src="https://source.unsplash.com/1000x300?{{ $news->category->en_name }}" alt="{{ $news->category->name }}" class="img-fluid">
+        @if ($news->image)
+        <div style="max-height: 300px; overflow:hidden;" class="d-flex justify-content-center">
+            <img src="{{ asset('storage/'.$news->image) }}" alt="{{ $news->category->name }}" class="img-fluid">
+        </div>
+        @else
+            <img src="https://source.unsplash.com/1000x300?{{ $news->category->en_name }}" alt="{{ $news->category->name }}" class="img-fluid">
+        @endif
 
         <p class="text-center text-muted mb-4">Kategori : <a class="text-decoration-none" href="/?category={{ $news->category->slug }}">{{ $news->category->name }}</a> | Penulis :  <a class="text-decoration-none" href="/?author={{ $news->author->username }}">{{ $news->author->name }}</a> | {{ $news->created_at->diffForHumans() }}</p>
 

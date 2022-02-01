@@ -8,7 +8,13 @@
             <div class="col-lg-10">
                 <h1 class="mt-2 mb-0">{{ $news->title }}</h1>
                 <p class="mb-2">Kategori : {{ $news->category->name }}</p>
-                <img src="https://source.unsplash.com/1000x300?{{ $news->category->en_name }}" alt="{{ $news->category->name }}" class="img-fluid mb-2">
+                @if ($news->image)
+                    <div style="width: 1000px; overflow:hidden;">
+                        <img src="{{ asset('storage/'.$news->image) }}" alt="{{ $news->category->name }}" class="img-fluid mb-2">
+                    </div>
+                @else
+                    <img src="https://source.unsplash.com/1000x300?{{ $news->category->en_name }}" alt="{{ $news->category->name }}" class="img-fluid mb-2">
+                @endif
 
                 <a href="/dashboard/news" class="btn btn-outline-primary"><span data-feather="arrow-left"></span> Back to My News</a>
                 <a href="/dashboard/news/{{ $news->slug }}/edit" class="btn btn-outline-success"><span data-feather="edit"></span> Edit</a>

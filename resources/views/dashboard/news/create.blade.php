@@ -8,7 +8,7 @@
       <h1 class="h2">Buat Berita Baru</h1>
     </div>
     <div class="col-md-7 mb-5">
-        <form action="/dashboard/news" method="post">
+        <form action="/dashboard/news" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -37,6 +37,13 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="newsImage" class="form-label">Pilih Gambar</label>
+                <input class="form-control @error('newsImage') is-invalid @enderror" type="file" id="newsImage" name="newsImage">
+                @error('newsImage')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
                 <input id="body" type="hidden" name="body" class="@error('body') is-invalid @enderror" required value="{{ old('body') }}">
                 <trix-editor input="body"></trix-editor>
@@ -58,6 +65,12 @@
         fetch("/dashboard/news/checkSlug?title=" + title.value)
         .then(response => response.json())
         .then(data => slug.value = data.slug)
+    });
+
+    document.querySelector(".trix-button-group--file-tools").remove();
+    // prevents attachments:
+    document.addEventListener("trix-file-accept", function(event) {
+        event.preventDefault();
     });
   </script>
 @endsection
