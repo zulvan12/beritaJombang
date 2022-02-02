@@ -38,7 +38,11 @@
             </div>
             <div class="mb-3">
                 <label for="newsImage" class="form-label">Pilih Gambar</label>
-                <input class="form-control @error('newsImage') is-invalid @enderror" type="file" id="newsImage" name="newsImage">
+                <div class="row justify-content-center my-0">
+                    <img class="img-preview img-fluid col-sm-5">
+                </div>
+
+                <input class="form-control @error('newsImage') is-invalid @enderror" type="file" id="newsImage" name="newsImage" onchange="previewImage()">
                 @error('newsImage')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -65,12 +69,28 @@
         fetch("/dashboard/news/checkSlug?title=" + title.value)
         .then(response => response.json())
         .then(data => slug.value = data.slug)
-    });
+    })
 
     document.querySelector(".trix-button-group--file-tools").remove();
     // prevents attachments:
     document.addEventListener("trix-file-accept", function(event) {
         event.preventDefault();
-    });
+    })
+
+    function previewImage() {
+        const image = document.querySelector('#newsImage');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+        if (!imgPreview.classList.contains('my-3')) {
+            imgPreview.className += ' my-3';
+        }
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    };
   </script>
 @endsection

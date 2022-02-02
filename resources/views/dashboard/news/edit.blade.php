@@ -8,7 +8,7 @@
       <h1 class="h2">Edit Berita</h1>
     </div>
     <div class="col-md-7 mb-5">
-        <form action="/dashboard/news/{{ $news->slug }}" method="post">
+        <form action="/dashboard/news/{{ $news->slug }}" method="post" enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="mb-3">
@@ -44,6 +44,22 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="newsImage" class="form-label">Pilih Gambar</label>
+                <input type="hidden" value="{{ $news->image }}" name="oldImage" >
+                <div class="row justify-content-center my-0">
+                    @if ($news->image)
+                        <img src="{{ asset('storage/'.$news->image) }}" class="img-preview img-fluid col-sm-5 my-3">
+                    @else
+                        <img class="img-preview img-fluid col-sm-5">
+                    @endif
+                </div>
+
+                <input class="form-control @error('newsImage') is-invalid @enderror" type="file" id="newsImage" name="newsImage" onchange="previewImage()">
+                @error('newsImage')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
                 <input id="body" type="hidden" name="body" class="@error('body') is-invalid @enderror" required value="{{ old('body', $news->body )}}">
                 <trix-editor input="body"></trix-editor>
@@ -66,5 +82,27 @@
         .then(response => response.json())
         .then(data => slug.value = data.slug)
     });
+
+    document.querySelector(".trix-button-group--file-tools").remove();
+    // prevents attachments:
+    document.addEventListener("trix-file-accept", function(event) {
+        event.preventDefault();
+    });
+
+    function previewImage() {
+        const image = document.querySelector('#newsImage');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+        if (!imgPreview.classList.contains('my-3')) {
+            imgPreview.className += ' my-3';
+        }
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    };
   </script>
 @endsection

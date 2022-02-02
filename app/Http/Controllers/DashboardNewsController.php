@@ -6,6 +6,7 @@ use App\Models\News;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class DashboardNewsController extends Controller
@@ -100,6 +101,7 @@ class DashboardNewsController extends Controller
         $rules =[
             'title' => 'required|max:255',
             'category_id' => 'required',
+            'newsImage' => 'image|file|max:2048',
             'body' => 'required',
         ];
 
@@ -109,10 +111,20 @@ class DashboardNewsController extends Controller
 
         $validatedData = $request->validate($rules);
 
+        if ($request->file('newsImage')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['image'] = $request->file('newsImage')->store('folder_newsImages');
+        }
+
         $validatedData['author_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($validatedData['body']), 200, '...');
 
-        News::where('id', $news->id)->update($validatedData);
+        $validatedData = collect($validatedData);
+        $validatedData->forget('newsImage');
+
+        News::where('id', $news->id)->update($validatedData->all());
         return redirect('/dashboard/news')->with('successInputNews','News has been updated!');
     }
 
@@ -124,6 +136,9 @@ class DashboardNewsController extends Controller
      */
     public function destroy(News $news)
     {
+        if ($news->image) {
+            Storage::delete($news->image);
+        }
         News::destroy($news->id);
         return redirect('/dashboard/news')->with('deleteNews','News has been deleted!');
     }
