@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\LoginController;
@@ -45,6 +46,8 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/{news:slug}', [NewsController::class, 'show']);
+
+Route::resource('/dashboard/categories', AdminCategoryController::class)->middleware(['auth', 'isAdmin']);
 
 // Route::get('/categories/{category:slug}', [CategoryController::class, 'show']);
 // Route::get('/authors/{author:username}', [AuthorController::class, 'show']);
